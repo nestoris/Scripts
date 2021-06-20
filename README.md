@@ -11,3 +11,6 @@ or:<br>
 `./test_colors.awk <<< "text"`<br>
 or:<br>
 `awk -f ./test_colors.awk <<< "text"`<br>
+
+## undivide.bc
+Script written on arithmetical **BC** language for finding a closest dividing operation, that can make a floating point number.
