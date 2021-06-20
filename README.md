@@ -21,3 +21,5 @@ number=3.14159265358979323846264338327950288419716939937508 #our number
 afterdot=8 #limit of digits after dot
 bc -q <<< $(sed 's/^count=.*$/count='$count'/g;s/^number=.*$/number='$number'/g;s/^afterdot=.*$/afterdot='$afterdot'/g;' ./undivide.bc)
 ```
+## arraytree.awk
+A script for exploring context of an array. How to use: edit the script file and change the 'ENVIRON' words in `arraytree(ENVIRON,"ENVIRON")` string to the name of your array.
