@@ -13,4 +13,11 @@ or:<br>
 `awk -f ./test_colors.awk <<< "text"`<br>
 
 ## undivide.bc
-Script written on arithmetical **BC** language for finding a closest dividing operation, that can make a floating point number.
+Script written on arithmetical **BC** language for finding a closest dividing operation, that can make a floating point number.<br>For running directly -- just make script executable by: "`$chmod +x undivide.bc`", and edit variables: 'count', 'number' and 'afterdot'.<br>Usage in bash scripts:
+```
+#!/bin/bash
+count=2000
+number=3.14159265358979323846264338327950288419716939937508
+afterdot=8
+bc -q <<< $(sed 's/^count=.*$/count='$count'/g;s/^number=.*$/number='$number'/g;s/^afterdot=.*$/afterdot='$afterdot'/g;' ./undivide.bc)
+```
