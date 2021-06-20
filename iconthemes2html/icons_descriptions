@@ -1,16 +1,19 @@
-#парсер:
-#awk '/^#/{next};!$2{cont=$1;next};$2{if(tolower($1)==$1){sub("\t",":",$0);$0=cont ":" $0;print}}' ./names_descriptions
-#Либо:
-#awk -F"\t" 'BEGIN{OFS=":"};{match($0,/(.+)\s(.+)/,a)};/^$/||/^#/{next};a[1]==a[2]{cont=$0;print;next};{$0=cont ":" $0};{print}' ./names_descriptions
-#Либо:
-#awk -F"\t" '/^$/||/^#/{next};!/ /&&/^[A-Z]/{cont=$1};$1!~/[A-Z]/&&!/^$/{print cont ":" $1}' /home/joker/Документы/icons/txt/names_descriptions
-#awk '$1!~/[A-Z]/&&!/^$/&&!/^#/' names_descriptions
-#только значки:
-#awk -F"\t" '$1!~/[A-Z]/&&!/^$/&&!/^#/{print $1, $2}' /home/joker/Документы/icons/txt/names_descriptions
+#simple parser:
+#awk '/^#/{next};!$2{cont=$1;next};$2{if(tolower($1)==$1){sub("\t",":",$0);$0=cont ":" $0;print}}' ./icons_descriptions
+#or:
+#awk -F"\t" 'BEGIN{OFS=":"};{match($0,/(.+)\s(.+)/,a)};/^$/||/^#/{next};a[1]==a[2]{cont=$0;print;next};{$0=cont ":" $0};{print}' ./icons_descriptions
+#or:
+#awk -F"\t" '/^$/||/^#/{next};!/ /&&/^[A-Z]/{cont=$1};$1!~/[A-Z]/&&!/^$/{print cont ":" $1}' /home/joker/Документы/icons/txt/icons_descriptions
+#awk '$1!~/[A-Z]/&&!/^$/&&!/^#/' icons_descriptions
+#only icons:
+#awk -F"\t" '$1!~/[A-Z]/&&!/^$/&&!/^#/{print $1, $2}' /home/joker/Документы/icons/txt/icons_descriptions
 #Получить список файлов в теме, соответствующих основным значками freedesktop
-#awk -F"\t" '{if(NR==FNR){if($1==tolower($1)&&!/^$/&&!/^#/)a[$1]=$1}else{nam=$1;gsub(/.[^.]+$/,"",nam);gsub(/.*\//,"",nam);if(nam in a){print $1}}}' ./names_descriptions <(find /home/joker/Документы/icons/SE98)
-#Проверить, все ли основные значки присутствуют в теме НЕДОДЕЛАН
-#awk '!/^$/{if(FILENAME~/index\.theme$/){FS="\n|\r";RS="[\n.*][[]";OFS=":";gsub("]","",$1)}else{FS="\t";RS="\n";OFS=":";if($0==$1&&$1!~" "){cont=$1};if($1==tolower($1)&&!/^$/&&!/^#/)a[$1]=$1}}!/^$/{print cont ":" $1}' ./index.theme /home/joker/Документы/icons/txt/names_descriptions
+#[en]Get a list of files in a theme that match the main freedesktop icons
+#awk -F"\t" '{if(NR==FNR){if($1==tolower($1)&&!/^$/&&!/^#/)a[$1]=$1}else{nam=$1;gsub(/.[^.]+$/,"",nam);gsub(/.*\//,"",nam);if(nam in a){print $1}}}' ./icons_descriptions <(find /home/joker/Документы/icons/SE98)
+#Проверить, все ли основные значки присутствуют в теме (НЕДОДЕЛАН)
+#[en]Check if all basic icons are present in the theme (UNFINISHED)
+#awk '!/^$/{if(FILENAME~/index\.theme$/){FS="\n|\r";RS="[\n.*][[]";OFS=":";gsub("]","",$1)}else{FS="\t";RS="\n";OFS=":";if($0==$1&&$1!~" "){cont=$1};if($1==tolower($1)&&!/^$/&&!/^#/)a[$1]=$1}}!/^$/{print cont ":" $1}' ./index.theme /home/joker/Документы/icons/txt/icons_descriptions
+
 Actions
 Icons which are generally used in menus and dialogs for interacting with the user.
 address-book-new	The icon used for the action to create a new address book.
