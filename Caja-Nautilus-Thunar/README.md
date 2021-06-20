@@ -14,16 +14,16 @@ Updates thumbnail of any thumbnailed file, or group of files. Needs *gio* as dep
 Converts symlink to it's original target.
 
 ## linkerator.sh
-Transforms all selected or typed as arguments files to relative soft links of one file, you are naming in zenity text-input dialog. Depends on package *zenity*.
+Transforms all selected (or typed as arguments in terminal) files to relative soft links of one file, that you are naming in zenity text-input dialog. Depends on package *zenity*.
 
 # Caja/Nautilus only Scripts
 
 ## backup.awk
-AWK script for making backups with current date/time of files in ~/bak/{name_of_folder_with_files}.
+AWK script for making backups with current date/time in filename of files in ~/bak/{name_of_folder_with_files}.
 Just select files, and apply this script. Time format is currently in Russian style.
 
 ## lincentrator.sh
-Useful for icon theme makers. if you have many identical files with different names, and even soft links to them in one directory, and you need the original to be one, and the rest to be links to it, then this script is what you need! Select any **<u>different</u>** files or soft links in one directory, and apply this script.<br>P.S. All messages are currently in Russian.
+Useful for icon theme makers. if you have many identical files with different names, and even soft links to them in one directory, and you need the original to be one, and the rest to be links to it, then this script is what you need! It finds all dupes (even soft links) in current directory by checksum. Select any **<u>different</u>** files or soft links in one directory, and apply this script.<br>P.S. All messages are currently in Russian.
 
 ## hardlink_to_next_panel.awk
 
