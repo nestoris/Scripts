@@ -9,6 +9,7 @@ BEGIN{
   split(basename,namext,".") #split basename to name and ext
   if(length(fils[i])>0){ #if not empty string
    namext[2]=(namext[2]?"."namext[2]:"") #if basename contains ".", then add dot to ext
+   system("mkdir -p \""ENVIRON["HOME"]"/bak/\"") #make bak directory even if it exists
    system("mkdir -p \""ENVIRON["HOME"]"/bak/"dirname"\"") #make named directory even if it exists
    system("cp \""fils[i]"\" \""ENVIRON["HOME"]"/bak/"dirname"/"namext[1]"_$(date +%Y.%m.%d_%H-%M-%S)"namext[2]"\"") #copy a file there
   }
