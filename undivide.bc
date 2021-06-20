@@ -1,0 +1,36 @@
+#!/usr/bin/bc -q
+/*Undivide*/
+/*Find closest division operation of getting number*/
+
+count=1000 /*how many numbers to use as multipliers*/
+number=3.14159265358979323846264338327950288419716939937508 /*what number do you want to undivide*/
+afterdot=40 /*digits after dot*/
+
+min=1 /*must be integer*/
+for(i=1;i<=count;i++){
+scale=afterdot
+u=(i*number)/1
+scale=0
+v=(i*number)/1
+o=u-v
+if(min>o){min=o}
+/*print "min=", min, "\s v=", v, "\s u=", u, "\s o=", o, "\s", "\s i=", i, "\n"*/
+}
+
+for(i=1;i<=count;i++){
+if(o==min){}
+scale=afterdot
+u=(i*number)/1
+scale=0
+v=(i*number)/1
+o=u-v
+if(o==min){
+print v+o, " / ", number, " = ", (v+o)/number, "\n\n"
+scale=0
+vo=(v+o)/1
+scale=afterdot
+print vo, " / ", number, " = ", vo/number, "\n"
+}
+}
+
+quit
