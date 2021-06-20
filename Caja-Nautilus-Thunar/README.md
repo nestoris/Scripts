@@ -7,9 +7,16 @@ Bash script. A tool for icon theme makers. it creates relative symlinks in (neig
 The princip of working:<br>
 It creates link targeted to "folder.png" with name "folder-closed.png" in folders: theme/places/16, theme/places/22, theme/places/24, theme/places/32 and theme/places/48 at one action.
 
+## refresh_thumbs.sh
+Updates thumbnail of any thumbnailed file, or group of files. Needs *gio* as dependency.
 
+## symlink2file.sh
+Converts symlink to it's original target.
 
-## Caja/Nautilus Scripts
+## Caja/Nautilus only Scripts
+
+## lincentrator.sh
+Useful for icon theme makers. if you have many identical files with different names, and even soft links to them in one directory, and you need the original to be one, and the rest to be links to it, then this script is what you need! Select any **<u>different</u>** files or soft links in one directory, and apply this script.
 
 ## hardlink_to_next_panel.awk
 
