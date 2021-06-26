@@ -32,7 +32,6 @@ Single click on icon copies to clipboard absolute path to current icon file, dou
 Gray background means that current image recognized as is symlink while directory listing.<br>
 When opening single theme file it draws one a table for all icons in context.
 
-*Screenshots:*
-![output html page](ith2html.png)
-
+*Screenshots:*<br>
+![output html page](ith2html.png)<br>
 ![output html page](ith2html_single.png)
