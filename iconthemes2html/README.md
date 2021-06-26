@@ -11,6 +11,7 @@ Files must be correct index.theme files with path.
 **-s** sizes to parse. Syntax: `-s=16,24,32`<br>
 **-d** description file. Syntax: `-d=/path/icons_descripnions`<br>
 **-u** user list of contexts, icons, and their descriptions; same as **-d**, but ignores icons, those aren't in list. Syntax: `-u=/path/list`<br>
+Syntax of list:<br>
 
 ```
 # any comment
