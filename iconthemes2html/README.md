@@ -30,8 +30,8 @@ icon22	Desc of icon22
 
 Single click on icon copies to clipboard absolute path to current icon file, double click copies absolute path to target (if it's a symlink).
 Gray background means that current image recognized as is symlink while directory listing.<br>
-When opening single theme file it draws one a table for all icons in context.
 
 *Screenshots:*<br>
 ![output html page](ith2html.png)<br>
+When opening a single theme file it draws one table for all icons in context.<br>
 ![output html page](ith2html_single.png)
