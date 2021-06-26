@@ -23,3 +23,15 @@ bc -q <<< $(sed 's/^count=.*$/count='$count'/g;s/^number=.*$/number='$number'/g;
 ```
 ## arraytree.awk
 GNU AWK script for exploring contents of a multi-dimensional associative array. How to use: edit the script file, and change the 'ENVIRON' words in `arraytree(ENVIRON,"ENVIRON")` string to the name of your array.
+
+## rne.awk
+AWK function of obtaining Russian endings (or any parts of word) of numerals, such as: "1 ведро, 2 ведра, 11 вёдер, 1 значок, 2 значка, 11 значков и т. д."<br> How to use:
+```
+#!/usr/bin/gawk -f
+@include "rne.awk"
+BEGIN{
+ for (vedra=0; vedra<=21; vedra++){
+  print "Баба несёт " vedra " пуст" rne(vedra,"ое","ых","ых") " в" rne(vedra,"е","е","ё") "д" rne(vedra,"ро","ра","ер") "."
+ }
+}
+```
