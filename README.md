@@ -35,3 +35,10 @@ BEGIN{
  }
 }
 ```
+
+## icontable.awk
+An AWK script, that opens MS Windows® *.ico* files as HTML-tables.<br>
+Needed "icoutils" package as dependency<br>
+*Screenshot*<br>
+![screen1](./icontable_muz.png "folder-music")<br>
+![screen1](./icontable_foxit.png "foxit reader")
