@@ -12,56 +12,17 @@ diff=(finishdate-startdate)/1000000;
 print "Время выполнения: " diff " мс"
 }
 
-function sortargs(){
-o=0
-for(i in ARGV){
-if(ARGV[io]~/^-.*/){
-o++
-opt[o]=ARGV[io]
-opt_tmp==ARGV[io]
-delete ARGV[io]
-
-if(opt[o] ~ /^-c=/){ #если указаны контексты
-opt_tmp=opt[o]
-gsub(/^-c=/,"",opt_tmp)
-conts=opt_tmp; gsub(","," ",conts) #делаем строку conts с пробелами вместо запятых
-split(opt_tmp,conts_input_array,",")
-}
-
-if(opt[o] ~ /^-s=/){ #если указаны размеры
-opt_tmp=opt[o]
-gsub(/^-s=/,"",opt_tmp)
-split(opt_tmp,sizes,",")
-}
-
-if(opt[o] ~ /^-u=/){ #если указан файл-список
-opt_tmp=opt[o]
-gsub(/^-u=/,"",opt_tmp)
-cmd = "if [[ -f "opt_tmp" ]];then awk -F\"\t\" 'BEGIN{OFS=\"\\t\"};/^$/||/^#/{next};!/ /&&/^[A-Z]/{cont=$1};$1!~/[A-Z]/&&!/^$/{print cont, $1, $2}' " opt_tmp";else echo \"error: Файл '"opt_tmp"' не найден\";fi";
-#cmd = "cat " opt_tmp;
-while ((cmd|getline linn)>0) #переменная linn -- каждая строка парсинга списка значков, скопированных из http://standards.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html
-print linn;
-if(linn!~"error: "){exit #если выдалась ошибка, то сразу выйти
-}else{
-{split(linn,stdi_stdd,"\t"); stdicon_cont[stdi_stdd[2]]=stdi_stdd[1]; stdicon_name[stdi_stdd[2]]=stdi_stdd[2]; stdicon_desc[stdi_stdd[2]]=stdi_stdd[3]}
-#stdicon[linn]
-std_icon_list=opt_tmp
-}
-close(cmd)
-}
-
-}}}
-
+@include "iconthemes2html_locale.awk"
 
 function printHelp(){
-print "Скрипт для просмотра и сравнения тем значков GNU/Linux.\n"
-print "Синтаксис: " scriptname "[ФАЙЛ1] [ФАЙЛ2]… [ПАРАМЕТР]…"
-print "\tФайлы могут быть как с полным путём, так и с относительным. Но всегда - index.theme. Вводятся через пробел перед указанием параметров.\n"
-print "Параметры бывают такие:"
-print "\t-с\tВыбор контекстов для сравнения. Указывается таким образом: «-c=Actions,MimeTypes»"
-print "\t-s\tВыбор размеров значков для обработки. Указывается таким же образом: «-s=16,32,48»"
-print "\t-u\tС этим параметром выводятся только значки, указанные в файле-списке. «-u=[ФАЙЛ]». Синтаксис файла:Контекст - одно слово в строке, далее список из строк типа: имя и описание значка, разделённые табуляцией. Строки, содержащие пробелы И заглавные буквы, начинающиеся с решётки, а так же пустые игнорируются"
-print "\t-f\tПапка для сохранения html-файлов. «-f=[папка]»."
+print _("scripdesc")
+print _("scripsyntax")
+print _("paramtitle")
+print _("opts_contexts")
+print _("opts_sizes")
+print _("opts_descriptions")
+print _("opts_descripted_only")
+print _("opts_outfolder")
 hlp_print="1"
 exit
 }
@@ -91,18 +52,18 @@ close(cmd2)
 function chooseConts(){ #выбор контекстов с помощью Зенити
 if(!conts){
 if(!conts_bash){conts_bash_f()}
-cmd = "zenity --list --width=500 --height=400 --multiple --separator=' ' --text='Выбери контексты темы (Ctrl+click - выбор нескольких)' --title 'Выбор контекстов' --column 'Контекст' "conts_bash" 2>/dev/null"
+cmd = "zenity --list --width=500 --height=400 --multiple --separator=' ' --text='" get_text["zenity"][1][lang] "' --title '"get_text["zenity"][2][lang]"' --column '"_("Context")"' "conts_bash" 2>/dev/null"
 while ((cmd|getline conts)>0);
 close(cmd)
 gsub(/\n/,"",conts)
 #split(conts,conts_arr," ")
 }
-print conts
+print _("ContsChosen")
 }
 
-function sortopt(i){
+function sortopt(i){ #Функция отделения опции от массива аргументов и совершения действий по ней.
 o++
-print "удалятся: " o". " ARGV[i], " № "i
+print _("deleting") ": " o". " ARGV[i], " № "i
 opt[o]=ARGV[i]
 opt_tmp==ARGV[i]
 delete ARGV[i]
@@ -128,12 +89,12 @@ gsub(/^\x22||\x22$||^'||'$/,"",opt_tmp)
 fldr=opt_tmp
 }
 
-if(opt[o] ~ /^-u=/){ #если указан файл-список
+if(opt[o] ~ /^-u=/||opt[o] ~ /^-d=/){ #если указан файл-список
 opt_tmp=opt[o]
-#print opt[o],"RRRRRRRRRRRR"
-gsub(/^-u=/,"",opt_tmp)
-print "Файл со значками и описаниями: \"" opt_tmp"\""
-cmd = "if [[ -f "opt_tmp" ]];then awk -F\"\\t\" 'BEGIN{OFS=\"\\t\"};/^$/||/^#/{next};!/ /&&/^[A-Z]/{cont=$1;contnr=NR};NR==contnr+1&&!/\\t/{print cont, $0};$1!~/[A-Z]/&&!/^$/{print cont, $1, $2}' \""opt_tmp"\";else echo \"error: Файл '"opt_tmp"' не найден\";fi"
+std_icon_optional=(opt_tmp ~ /^-d=/ ? 1:0)
+gsub(/^-.=/,"",opt_tmp)
+print _("file_with_descs")"\"" opt_tmp"\""
+cmd = "if [[ -f "opt_tmp" ]];then awk -F\"\\t\" 'BEGIN{OFS=\"\\t\"};/^$/||/^#/{next};!/ /&&/^[A-Z]/{cont=$1;contnr=NR};NR==contnr+1&&!/\\t/{print cont, $0};$1!~/[A-Z]/&&!/^$/{print cont, $1, $2}' \""opt_tmp"\";else echo \"error: "_("FileOptTmpNotFound")"\";fi"
 #print cmd
 #cmd = "cat " opt_tmp;
 while ((cmd|getline linn)>0){ #переменная linn -- каждая строка парсинга списка значков, скопированных из http://standards.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html
@@ -210,9 +171,9 @@ tabledone=true
 
 function printTable(){
 		if ($1 ~ /Icon Theme/){
-			print "Тема",$1,name,comment,example,dirs,inherits
+			print _("Theme"),$1,name,comment,example,dirs,inherits
 		}else{
-			print "Папка",$1,size,context,type,minsize,maxsize,scale,threshold,"\t"$0
+			print _("Folder"),$1,size,context,type,minsize,maxsize,scale,threshold,"\t"$0
 		}
 }
 
@@ -249,7 +210,7 @@ if($1!~"Icon Theme"){
 	}
 }else{
 	if(FNUM>1)print ""
-	print "Тема №" FNUM
+	print _("Theme")" №" FNUM
 	print "theme["FNUM"][\"name\"]=\""name"\""
 	print "theme["FNUM"][\"comment\"]=\""comment"\""
 	print "theme["FNUM"][\"example\"]=\""example"\""
@@ -365,7 +326,7 @@ function prepare(){ #в теле
 function makefiles(){
  for(ff in conts_arr){ #цикл в отфильтрованном массиве выбранных/существующих контекстов
   currentcont=conts_arr[ff]
-
+  themenumber++
 for(prn_Type in typesCont[currentcont]){
 #print typesCont[currentcont][prn_Type] " - " prn_Type
 #for(egg in typesSizesCont[currentcont][prn_Type]){print toupper(prn_Type);print prn_Type " - " typesSizesCont[i][prn_Type][egg] " - " egg}
@@ -373,10 +334,10 @@ typespan[prn_Type]=length(typesSizesCont[currentcont][prn_Type])
 }
 
   if(fldr){pwd=fldr}
-  fileoutput=fileoutput?fileoutput:pwd"/"currentcont".html"
-  print "Создаётся \"" fileoutput "\"..."
+  fileoutput=pwd"/"currentcont".html"
+  print _("Creating") " \"" fileoutput "\"..."
   #system ("zenity --question --text=" currentcont)
-  ("if [ -f \"" fileoutput "\" ]; then zenity --question --text=\"Заменить файл "currentcont".html?\" &&echo $?; else echo "1";fi"|getline overwrite)
+  ("if [ -f \"" fileoutput "\" ]; then zenity --question --text=\""_("Overwritefile")" "currentcont".html?\" &&echo $?; else echo "1";fi"|getline overwrite)
   if(overwrite~"0"){
    ("rm \"" fileoutput "\"")
    htmlTableFile(fileoutput)
@@ -390,7 +351,11 @@ typespan[prn_Type]=length(typesSizesCont[currentcont][prn_Type])
 }
 
 function htmlTableFile(context_html){ #Вывод таблиц сравнения контекстов в файлы
- if(FNUM>1){title=currentcont ":"; for(i=1; i <= FNUM; i++){title=title " " name_arr[i]}}
+themesstring=""
+ for(i=1; i <= FNUM; i++){themesstring=(themesstring?themesstring (i==FNUM?", and ":", "):"") "\"" name_arr[i] "\""
+#print themesstring
+}
+ if(FNUM>1){title=currentcont " : " themesstring}
  else{title=currentcont " - " name " - " comment}
 
  print "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\" />\n<title>" title "</title>\n</head>" > context_html
@@ -426,36 +391,39 @@ function htmlTableFile(context_html){ #Вывод таблиц сравнени�
  print "#icontbl{box-shadow: 0.4em 0.4em 15px rgba(0,0,0,0.3);}" >> context_html
  print "</style>" >> context_html
  print "" >> context_html
- print "<body>\n<center>\n<div id=\"caption\">" currentcont "</div>"(std_icon_list?"Description from \""std_icon_list"\" list":"")"<p>" >> context_html
+ print "<body>\n<center>\n<div id=\"caption\">" currentcont "</div>" >> context_html
  i = currentcont
- print (isarray(icon[i]) ? "icon["i"] - массив" : "icon["i"] - НЕ массив")
+ #print (isarray(icon[i]) ? "icon["i"] - массив" : "icon["i"] - НЕ массив")
  numic=asorti(icon[i], sorted)
- print "В контексте \""i"\" - " numic " значков."
+ print _("HowManyIcInCont")
+ print numic==0?"":_("TotalyFoundIcons")(std_icon_list?_("DescIsGot"):"")(FNUM==1?"": _("CompOfThms") themesstring) ".<p>" >> context_html
  print (std_icon_list?"<table class=\"description\"><tr><td>"stdicon_descont[i]"</td></tr></table><p>":"") >> context_html
 # print "<tr><td colspan=\"" length(sizesCont[i])*length(typesCont[i])+2 "\" class=\"title\"><div id=\"title\">" i "</div><br>"stdicon_descont[i]"</td></tr>" >> context_html #Заголовок - Контекст
  print "" >> context_html
  for(srt=1;srt<=numic;srt++){ #цикл в сортированном массиве значков
   n=sorted[srt]
-if(n in stdicon_name || !std_icon_list){
-  numic_print++
+if(n in stdicon_name || !std_icon_list || std_icon_optional==1){
+  numic_print++ # номер текущего значка и количество обработанных в конце
   #print n " - n"
-  print "<table id=\"icontbl\" border=1>" >> context_html
-  captionspan=length(sizesCont[i])*length(typesCont[i])+2
-  print "<tr>\n<td colspan=\"" captionspan "\" class=title><div id=title>&nbsp;"n"&nbsp;</td>\n</tr>\n<tr>\n"(std_icon_list?"<td colspan=\"" captionspan "\" class=\"dialog\">"stdicon_desc[n] (tolower(stdicon_cont[n])!=tolower(currentcont)?"<br>Maybe the context of <b>\""n"\"</b> is <b>\""stdicon_cont[n]"\"</b>?":"")"</td>":"")"\n</tr>" >> context_html
+  print FNUM==1&&numic_print!=1?"":"<table id=\"icontbl\" border=1>" >> context_html
+  captionspan=length(sizesCont[i])*length(typesCont[i])+(FNUM==1?1:2)
+  print FNUM!=1||numic_print==1?"<tr>\n<td colspan=\"" captionspan "\" class=title><div id=title>&nbsp;"(FNUM==1?_("TblOfCont"):n)"&nbsp;</td>\n</tr>" (FNUM==1?"":"\n<tr>\n"(stdicon_desc[n]?"<td colspan=\"" captionspan "\" class=\"dialog\">" stdicon_desc[n] (tolower(stdicon_cont[n])!=tolower(currentcont)?_("MaybeContext"):"")"</td>":"")"\n</tr>"):"" >> context_html
 
 #  print "<tr><td rowspan="FNUM+1" align=\"center\" valign=\"top\"><b>" n "</b>"(std_icon_list?"<br>"stdicon_desc[n](tolower(stdicon_cont[n])!=tolower(currentcont)?"<br>Maybe the context of <b>\""n"\"</b> is <b>\""stdicon_cont[n]"\"</b>?":""):"")"</td><td>Тема</td>" >> context_html #Название значка и заголовок колонки
 #  print "<tr>"(std_icon_list?"<br>"stdicon_desc[n](tolower(stdicon_cont[n])!=tolower(currentcont)?"<br>Maybe the context of <b>\""n"\"</b> is <b>\""stdicon_cont[n]"\"</b>?":""):"")"</td><td>Тема</td>" >> context_html #Название значка и заголовок колонки
-  print "<tr class=cap><td>Тема</td>" >> context_html
-  for(prn_Type in typesCont[i]){
-   #print prn_Type " - prn_Type"
-   thistype=tolower(typesCont[i][prn_Type]);gsub(/^./,toupper(substr(thistype,1,1)),thistype) #Тип с заглавной буквы, потому что в makeTable был lowercase
-   print "<td class=shortcut colspan=\""typespan[prn_Type]"\">"thistype"</td><!-- "length(sizesType[prn_Type])" -->" >> context_html #Типы значка  colspan=\"" length(sizesCont[i])/length(typesSizesCont[i][prn_Type]) "\"
+  print FNUM==1&&numic_print!=1?"":"<tr class=cap>"(FNUM==1?"<td>Name</td>":"<td>Тема</td>") >> context_html
+  if(FNUM!=1||numic_print==1){
+   for(prn_Type in typesCont[i]){
+    #print prn_Type " - prn_Type"
+    thistype=tolower(typesCont[i][prn_Type]);gsub(/^./,toupper(substr(thistype,1,1)),thistype) #Тип с заглавной буквы, потому что в makeTable был lowercase
+    print "<td class=shortcut colspan=\""typespan[prn_Type]"\">"thistype"</td><!-- "length(sizesType[prn_Type])" -->" >> context_html #Типы значка  colspan=\"" length(sizesCont[i])/length(typesSizesCont[i][prn_Type]) "\"
+   }
   }
   print "</tr>" >> context_html
   #for(th in icon[i][n]){
   for(th=1;th<=FNUM;th++){
    if(th>1){print "<tr>" >> context_html}
-   print "<td><div title=\""pathToTheme[th]"\" class=\"titled\" onclick=\"navigator.clipboard.writeText('" pathToTheme[th] "')\">"name_arr[th]"</div></td>" >> context_html
+   print "<td>"(FNUM==1?n (stdicon_desc[n]?"<br><small>"stdicon_desc[n]"</small>":""):"<div title=\""_("Copy")" '"pathToTheme[th]"'\" class=\"titled\" onclick=\"navigator.clipboard.writeText('" pathToTheme[th] "')\">"name_arr[th]"</div></td>") >> context_html
    #for(ty in icon[i][n][th]){#####################
    for(ty in typesCont[i]){
     asort(sizesCont[i],sizesdo)
@@ -475,10 +443,10 @@ if(n in stdicon_name || !std_icon_list){
    }
    print "</tr>" >> context_html
   }
- print "</table>\n<p>" >> context_html
 }
+print FNUM!=1||srt==numic?"</table>\n<p>":"" >> context_html
  }
- print "В файл \""context_html"\" добавлено " numic_print " значков.";numic_print=0
+ print _("AddedIconsInFile");numic_print=0
 print "</center>\n</body>\n</html>" >> context_html
 }
 
@@ -487,17 +455,17 @@ print "</center>\n</body>\n</html>" >> context_html
 
 
 BEGIN{
+lang="ru"
+localize()
 if(ARGC<2||ARGV[1]~/^-.*/){printHelp()}
 starttime()
-#sortargs()
 FS="\n|\r"; RS="[\n.*][[]"; OFS=":"
 if(ENVIRON["sizes"]){countsizes()}
 conts_bash_f()
 #conts="Applications"
 chooseConts()
 if(!conts){exit}
-if(ARGC==2){yy="ы"}
-print "Собираются данные тем" yy "..."
+print _("CollectData")
 }
 
 
@@ -549,7 +517,7 @@ getpathhere()
 makefiles()
 #print pwd
 #print std_icon_list
-if(hlp_print!="1")print "Готово!"
+if(hlp_print!="1")print _("Done")"!"
 #ff="1 2 3 4 5 6"
 #split(ff,ff_arr," ")
 #for(i in ff_arr){
