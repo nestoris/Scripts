@@ -395,6 +395,7 @@ themesstring=""
  i = currentcont
  #print (isarray(icon[i]) ? "icon["i"] - массив" : "icon["i"] - НЕ массив")
  numic=asorti(icon[i], sorted)
+localize()
  print _("HowManyIcInCont")
  print numic==0?"":_("TotalyFoundIcons")(std_icon_list?_("DescIsGot"):"")(FNUM==1?"": _("CompOfThms") themesstring) ".<p>" >> context_html
  print (std_icon_list?"<table class=\"description\"><tr><td>"stdicon_descont[i]"</td></tr></table><p>":"") >> context_html
@@ -455,8 +456,9 @@ print "</center>\n</body>\n</html>" >> context_html
 
 
 BEGIN{
-lang="ru"
 localize()
+lang=substr(ENVIRON["LANG"],1,2)
+lang=(lang in langsarr?lang:"en")
 if(ARGC<2||ARGV[1]~/^-.*/){printHelp()}
 starttime()
 FS="\n|\r"; RS="[\n.*][[]"; OFS=":"
