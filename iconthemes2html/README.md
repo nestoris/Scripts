@@ -9,7 +9,7 @@ Files must be correct index.theme files with path.
 <br>**Options are:**<br>
 **-c** contexts for parsing. Syntax: `-c=Actions,Places,MimeTypes`<br>
 **-s** sizes to parse. Syntax: `-s=16,24,32`<br>
-**-d** description file. Syntax: `-d=/path/icons_descripnions`
+**-d** description file. Syntax: `-d=/path/icons_descripnions`<br>
 **-u** user list of contexts, icons, and their descriptions; same as **-d**, but ignores icons, those aren't in list. Syntax: `-u=/path/list`<br>
 
 ```
@@ -34,4 +34,5 @@ When opening single theme file it draws one a table for all icons in context.
 
 *Screenshots:*
 ![output html page](ith2html.png)
+
 ![output html page](ith2html_single.png)
