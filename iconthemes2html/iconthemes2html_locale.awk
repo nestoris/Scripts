@@ -12,7 +12,12 @@ function rne(rusnum,raz,dva,mnogo){
  return outrusend;
 }
 
+
+
 function localize(){
+langsarr["ru"]="ru"
+langsarr["en"]="en"
+
 get_text["scripdesc"]["ru"]="Скрипт для просмотра и сравнения тем значков GNU/Linux.\n"
 get_text["scripdesc"]["en"]="Script for viewing and comparing icon themes of GNU/Linux.\n"
 
@@ -88,8 +93,8 @@ get_text["DescIsGot"]["en"]="<br>\nDescription is got from: \""std_icon_list"\" 
 get_text["CompOfThms"]["ru"]="<br>\nСравнение " length(ARGV) "-"rne(length(ARGV),"й","х","и")" тем"rne(length(ARGV),"ы","","")": "
 get_text["CompOfThms"]["en"]="<br>\nComparison of " length(ARGV) " themes: "
 
-get_text["TblOfCont"]["ru"]="Table of \"<b>"i"</b>\" context in \"<b>" name "</b>\" theme"
-get_text["TblOfCont"]["en"]="Таблица контекста \"<b>"i"</b>\" в теме \"<b>" name "</b>\""
+get_text["TblOfCont"]["ru"]="Таблица контекста \"<b>"i"</b>\" в теме \"<b>" name "</b>\""
+get_text["TblOfCont"]["en"]="Table of \"<b>"i"</b>\" context in \"<b>" name "</b>\" theme"
 
 get_text["MaybeContext"]["ru"]="<br>Возможно, значок <b>\""n"\"</b> принадлежит контексту <b>\""stdicon_cont[n]"\"</b>?"
 get_text["MaybeContext"]["en"]="<br>Maybe the context of <b>\""n"\"</b> is <b>\""stdicon_cont[n]"\"</b>?"
