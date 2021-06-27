@@ -8,7 +8,9 @@ The princip of working:<br>
 It creates link targeted to "folder.png" with name "folder-closed.png" in folders: theme/places/16, theme/places/22, theme/places/24, theme/places/32 and theme/places/48 at one action.
 
 ## refresh_thumbs.sh
-Updates thumbnail of any thumbnailed file, or group of files. Needs *gio* as dependency.
+Updates thumbnail of any thumbnailed file, or group of files. Needs *gio* as dependency.<br>
+*Screenshot*<br>
+![screenshot](thupd.png "thupd.png")
 
 ## symlink2file.sh
 Converts symlink to it's original target.
