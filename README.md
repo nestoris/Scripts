@@ -12,7 +12,7 @@ or:<br>
 or:<br>
 `awk -f ./test_colors.awk <<< "text"`<br>
 
-## undivide.bc
+## [Undivide](undivide.bc)
 Script written on arithmetical **BC** language for finding a closest dividing operation, that can make a floating point number.<br>For running directly -- just make script executable by: "`$chmod +x undivide.bc`", and edit variables: 'count', 'number' and 'afterdot'.<br>Usage in bash scripts:
 ```
 #!/bin/bash
@@ -21,12 +21,12 @@ number=3.14159265358979323846264338327950288419716939937508 #our number
 afterdot=8 #limit of digits after dot
 bc -q <<< $(sed 's/^count=.*$/count='$count'/g;s/^number=.*$/number='$number'/g;s/^afterdot=.*$/afterdot='$afterdot'/g;' ./undivide.bc)
 ```
-## arraytree.awk
+## [Array Tree](arraytree.awk)
 GNU AWK script for exploring contents of a multi-dimensional associative array. How to use: edit the script file, and change the 'ENVIRON' words in `arraytree(ENVIRON,"ENVIRON")` string to the name of your array.<br>
 *Screenshot:*<br>
 ![arraytree](arraytree.png)
 
-## rne.awk
+## [Russian Name Endings](rne.awk)
 AWK function of obtaining Russian endings (or any parts of word) of numerals, such as: "1 ведро, 2 ведра, 11 вёдер, 1 значок, 2 значка, 11 значков и т. д."<br> How to use:
 ```
 #!/usr/bin/gawk -f
@@ -38,7 +38,7 @@ BEGIN{
 }
 ```
 
-## icontable.awk
+## [Icon Table](icontable.awk)
 An AWK script, that opens MS Windows® *.ico* files as HTML-tables.<br>
 Needed "icoutils" package as dependency<br>
 *Screenshot*<br>
