@@ -11,6 +11,8 @@ or:<br>
 `./test_colors.awk <<< "text"`<br>
 or:<br>
 `awk -f ./test_colors.awk <<< "text"`<br>
+*Screenshot*<br>
+![test_colors](test_colors.png)<br>
 
 ## [Undivide](undivide.bc)
 Script written on arithmetical **BC** language for finding a closest dividing operation, that can make a floating point number.<br>For running directly -- just make script executable by: "`$chmod +x undivide.bc`", and edit variables: 'count', 'number' and 'afterdot'.<br>Usage in bash scripts:
