@@ -1,7 +1,7 @@
 # Useful Scripts  
 Some useful scripts written for myself. Maybe will be useful for you too.
 
-## test_colors.awk
+## [Test Colors](test_colors.awk "test_colors.awk")
 AWK script. Makes test of different color output of awk print.<br>
 Syntax:<br>
 `echo "text"|awk -f ./test_colors.awk`<br>
