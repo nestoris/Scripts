@@ -11,7 +11,7 @@ or:<br>
 `./test_colors.awk <<< "text"`<br>
 or:<br>
 `awk -f ./test_colors.awk <<< "text"`<br>
-*Screenshot*<br>
+*Screenshot:*<br>
 ![test_colors](test_colors.png)<br>
 
 ## [Undivide](undivide.bc)
@@ -42,7 +42,7 @@ BEGIN{
 
 ## [Icon Table](icontable.awk)
 An AWK script, that opens MS Windows® *.ico* files as HTML-tables.<br>
-Needed "icoutils" package as dependency<br>
+Needed "icoutils" package as dependency.<br>
 *Screenshot*<br>
 ![screen1](./icontable_muz.png "folder-music")<br>
 ![screen1](./icontable_foxit.png "foxit reader")
