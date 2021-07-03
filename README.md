@@ -46,9 +46,9 @@ BEGIN{
 ```
 Output:<br>
 ![](baba_vedra.png)<br>
-`awk '@include "rne.awk"; BEGIN{str="1 2 5 10 11 30 40 50 70 90 94 100 101 110 111 153 200 201 220 400 500 540 542 1000 2000 3000 5000 11000 22000 11000000 11100001";split(str,arr);for(i in arr){print "Есть " arr[i] " самосвал" rne(arr[i],"","ов","а") ". Нет " arr[i] rne_pf(arr[i],"-го","-х","-и","-а","-т","","-и","-ч","-ф") " самосвал" rne(arr[i],"а","ов")"."}}'`<br>
+`awk '@include "rne.awk"; BEGIN{str="0 1 2 5 10 11 30 40 50 70 90 94 100 101 110 111 153 200 201 220 400 500 540 542 1000 2000 3000 5000 11000 22000 11000000 11100001";split(str,arr);for(i in arr){print "Есть " arr[i] " самосвал" rne(arr[i],"","ов","а","ей") ". Нет " arr[i] rne_pf(arr[i],"-го","-х","-и","-а","-т","","-и","-ч","-я") " самосвал" rne(arr[i],"а","ов","","ей :-)")"."}}'`<br>
 Output:<br>
-![](samosval.png)
+![](samosvaley.png)
 ## [Icon Table](icontable.awk)
 An AWK script, that opens MS Windows® *.ico* files as HTML-tables.<br>
 Needed "icoutils" package as dependency.<br>
