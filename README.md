@@ -29,7 +29,12 @@ GNU AWK script for exploring contents of a multi-dimensional associative array. 
 ![arraytree](arraytree.png)
 
 ## [Russian Number Endings](rne.awk)
-AWK function of obtaining Russian endings (or any parts of word) of numerals, such as: "1 ведро, 2 ведра, 11 вёдер, 1 значок, 2 значка, 11 значков и т. д."<br>Function `rne(number,end_for_1_21_31,end_for_2-4_22-24_etc,end_for_5-20_25-30_etc,end_for_0)`<br> How to use:
+AWK functions of obtaining Russian endings (or any parts of word) and postfixes of numerals, such as: "1 ведро, 2 ведра, 11 вёдер, об 1-м значке, о 2-х значках, о 2000-ах значков и т. д." <br>Functions:
+```
+rne(number,1_21_31,5-20_25-30,2-4_22-24,0)
+rne_pf(number,for1,for2-4,for5-20,for40_90_100,for200-400,for1000,for2000-4000)
+```
+<br> How to use:
 ```
 #!/usr/bin/gawk -f
 @include "rne.awk"
@@ -41,9 +46,9 @@ BEGIN{
 ```
 Output:<br>
 ![](baba_vedra.png)<br>
-`awk -v begin=0 -v end=21 '@include "rne.awk"; BEGIN{for (vedra=begin; vedra<=end; vedra++){ print "У бабы нет" (vedra!=0?" "vedra"-":"") rne(vedra,"го","х","и"," ")" пуст" rne(vedra,"ого","ых","ых") " в" rne(vedra,"е","ё","ё") "д" rne(vedra,"ра","ер","ер") "." } }'`<br>
+`awk '@include "rne.awk"; BEGIN{str="1 2 5 10 11 30 40 50 70 90 94 100 101 110 111 153 200 201 220 400 500 540 542 1000 2000 3000 5000 11000 22000 11000000 11100001";split(str,arr);for(i in arr){print "Есть " arr[i] " самосвал" rne(arr[i],"","ов","а") ". Нет " arr[i] rne_pf(arr[i],"-го","-х","-и","-а","-т","","-и","-ч","-ф") " самосвал" rne(arr[i],"а","ов")"."}}'`<br>
 Output:<br>
-![](baba_net_veder.png)
+![](samosval.png)
 ## [Icon Table](icontable.awk)
 An AWK script, that opens MS Windows® *.ico* files as HTML-tables.<br>
 Needed "icoutils" package as dependency.<br>
