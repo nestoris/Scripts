@@ -28,7 +28,7 @@ GNU AWK script for exploring contents of a multi-dimensional associative array. 
 *Screenshot:*<br>
 ![arraytree](arraytree.png)
 
-## [Russian Name Endings](rne.awk)
+## [Russian Number Endings](rne.awk)
 AWK function of obtaining Russian endings (or any parts of word) of numerals, such as: "1 ведро, 2 ведра, 11 вёдер, 1 значок, 2 значка, 11 значков и т. д."<br> How to use:
 ```
 #!/usr/bin/gawk -f
