@@ -1,7 +1,9 @@
-# Useful Scripts  
+# Useful Scripts
+### Полезные скрипты
 Some useful scripts written for myself. Maybe will be useful for you too.
 
 ## [Test Colors](test_colors.awk "test_colors.awk")
+### Проверка цветового вывода.
 AWK script. Makes test of different color output of awk print.<br>
 Syntax:<br>
 `echo "text"|awk -f ./test_colors.awk`<br>
@@ -15,6 +17,7 @@ or:<br>
 ![test_colors](test_colors.gif)<br>
 
 ## [Undivide](undivide.bc)
+### Что на что поделили, чтобы ЭТО получилось.
 Script written on arithmetical **BC** language for finding a closest dividing operation, that can make a floating point number.<br>For running directly -- just make script executable by: "`$chmod +x undivide.bc`", and edit variables: 'count', 'number' and 'afterdot'.<br>Usage in bash scripts:
 ```
 #!/bin/bash
@@ -24,11 +27,13 @@ afterdot=8 #limit of digits after dot
 bc -q <<< $(sed 's/^count=.*$/count='$count'/g;s/^number=.*$/number='$number'/g;s/^afterdot=.*$/afterdot='$afterdot'/g;' ./undivide.bc)
 ```
 ## [Array Tree](arraytree.awk)
+### Массив AWK в виде дерева.
 GNU AWK script for exploring contents of a multi-dimensional associative array. How to use: edit the script file, and change the 'ENVIRON' words in `arraytree(ENVIRON,"ENVIRON")` string to the name of your array.<br>
 *Screenshot:*<br>
 ![arraytree](arraytree.png)
 
 ## [Russian Number Endings](rne.awk)
+### Русские окончания числительных.
 AWK functions of obtaining Russian endings (or any parts of word) and postfixes of numerals, such as: "1 ведро, 2 ведра, 11 вёдер, об 1-м значке, о 2-х значках, о 2000-ах значков и т. д." <br>Functions:
 ```
 rne(number,1_21_31,5-20_25-30,2-4_22-24,0)
@@ -50,6 +55,7 @@ Output:<br>
 Output:<br>
 ![](samosvaley.png)
 ## [Icon Table](icontable.awk)
+### Таблица форматов значка виндоус.
 An AWK script, that opens MS Windows® *.ico* files as HTML-tables.<br>
 Needed "icoutils" package as dependency.<br>
 *Screenshot*<br>
