@@ -29,7 +29,7 @@ GNU AWK script for exploring contents of a multi-dimensional associative array. 
 ![arraytree](arraytree.png)
 
 ## [Russian Number Endings](rne.awk)
-AWK function of obtaining Russian endings (or any parts of word) of numerals, such as: "1 ведро, 2 ведра, 11 вёдер, 1 значок, 2 значка, 11 значков и т. д."<br> How to use:
+AWK function of obtaining Russian endings (or any parts of word) of numerals, such as: "1 ведро, 2 ведра, 11 вёдер, 1 значок, 2 значка, 11 значков и т. д."<br>Function `rne(number,end_for_1_21_31,end_for_2-4_22-24_etc,end_for_5-20_25-30_etc,end_for_0)`<br> How to use:
 ```
 #!/usr/bin/gawk -f
 @include "rne.awk"
@@ -40,7 +40,10 @@ BEGIN{
 }
 ```
 Output:<br>
-![](baba_vedra.png)
+![](baba_vedra.png)<br>
+`awk -v begin=0 -v end=21 '@include "rne.awk"; BEGIN{for (vedra=begin; vedra<=end; vedra++){ print "У бабы нет" (vedra!=0?" "vedra"-":"") rne(vedra,"го","х","и"," ")" пуст" rne(vedra,"ого","ых","ых") " в" rne(vedra,"е","ё","ё") "д" rne(vedra,"ра","ер","ер") "." } }'`<br>
+Output:<br>
+![](baba_net_veder.png)
 ## [Icon Table](icontable.awk)
 An AWK script, that opens MS Windows® *.ico* files as HTML-tables.<br>
 Needed "icoutils" package as dependency.<br>
