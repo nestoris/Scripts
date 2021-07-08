@@ -16,6 +16,20 @@ or:<br>
 *Screenshot:*<br>
 ![test_colors](test_colors.gif)<br>
 
+## [HighLight](hl.awk)
+### Выделение текста цветом
+Script written on AWK for highlighting some text in command outputs by differrent colors.
+How to use:
+```
+hl.awk [word1] [word2]... file
+```
+or (example on screenshot)
+```
+yay -Ss ConnMan|hl.awk connman network manager user 2016 menu tray gtk lxqt interface
+```
+*Screenshot:*<br>
+![](hl.png)
+
 ## [Undivide](undivide.bc)
 ### Что на что поделили, чтобы ЭТО получилось.
 Script written on arithmetical **BC** language for finding a closest dividing operation, that can make a floating point number.<br>For running directly -- just make script executable by: "`$chmod +x undivide.bc`", and edit variables: 'count', 'number' and 'afterdot'.<br>Usage in bash scripts:
