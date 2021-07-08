@@ -28,7 +28,9 @@ or (example on screenshot)
 yay -Ss ConnMan|hl.awk connman network manager user 2016 menu tray gtk lxqt interface
 ```
 *Screenshot:*<br>
-![](hl.png)
+![](hl.png)<p>
+*Screenshot with regexp:*<br>
+![](hl_regexp.png)
 
 ## [Undivide](undivide.bc)
 ### Что на что поделили, чтобы ЭТО получилось.
