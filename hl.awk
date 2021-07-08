@@ -12,11 +12,14 @@ BEGIN{
  delete ARGV[i]
 }
  black="\033[0m"
+ color[0]=black
 }
 
 {
  for(i in marker){
-  gsub(marker[i],color[i]"&"black,$0)
+  u=gsub(marker[i],color[i]"&"black,$0)
+#  $0 = $0 " " color[i] u black
+  colorprev=color[i]
  }
  print
 }
