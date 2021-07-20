@@ -1,4 +1,9 @@
 #!/usr/bin/gawk -f
+#
+# hl.awk --- highlight text in standard outputs.
+#
+# Evgeny Dobromilskiy, voltasar@gmail.com, Public Domain
+# June 2021
 
 BEGIN{
  colnum=0
