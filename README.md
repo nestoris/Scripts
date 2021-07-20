@@ -18,7 +18,7 @@ or:<br>
 
 ## [HighLight](hl.awk)
 ### Выделение текста цветом
-Script written on AWK for highlighting some text in command outputs by differrent colors.
+Script written on AWK for highlighting some text in command outputs by differrent colors.<br>
 How to use:
 ```
 hl.awk [word1] [word2]... file
@@ -32,9 +32,14 @@ yay -Ss ConnMan|hl.awk connman network manager user 2016 menu tray gtk lxqt inte
 *Screenshot with regexp:*<br>
 ![](hl_regexp.png)
 
-## [Packages depandency](pacdep.sh)
+## [Reverse package dependency](pacdep.sh)
 ### Что зависит от пакета (pacman)
 The script for finding reverse dependencies with pacman package manager.<br>
+How to use:
+```
+pacdep.sh [PACKAGE1] [PACKAGE2]...
+```
+
 *Screenshot:*<br>
 ![](pacdep.png)
 
