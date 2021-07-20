@@ -32,6 +32,12 @@ yay -Ss ConnMan|hl.awk connman network manager user 2016 menu tray gtk lxqt inte
 *Screenshot with regexp:*<br>
 ![](hl_regexp.png)
 
+## [Packages depandency](pacdep.sh)
+### Что зависит от пакета (pacman)
+The script for finding reverse dependencies with pacman package manager.<br>
+*Screenshot:*<br>
+![](pacdep.png)
+
 ## [Undivide](undivide.bc)
 ### Что на что поделили, чтобы ЭТО получилось.
 Script written on arithmetical **BC** language for finding a closest dividing operation, that can make a floating point number.<br>For running directly -- just make script executable by: "`$chmod +x undivide.bc`", and edit variables: 'count', 'number' and 'afterdot'.<br>Usage in bash scripts:
