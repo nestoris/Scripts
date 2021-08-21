@@ -61,7 +61,7 @@ GNU AWK script for exploring contents of a multi-dimensional associative array. 
 
 ## [Test icon theme](test-icon-theme.awk)
 ### [ru] Все ли значки правильно разложены по своим размерам?
-Test if all the PNG icns of an IconTheme have the same size as it was set in icon.theme file.<br>
+Test if all the PNG icons of an IconTheme have the same size as it was set in icon.theme file.<br>
 *Screenshot:*<br>
 ![Screenshot](test-icon-theme.png)
 Requirements:<br>
