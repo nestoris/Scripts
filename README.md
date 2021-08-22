@@ -1,9 +1,9 @@
 # Useful Scripts
-### Полезные скрипты
+### [ru] Полезные скрипты
 Some useful scripts written for myself. Maybe will be useful for you too.
 
 ## [Test Colors](test_colors.awk "test_colors.awk")
-### Проверка цветового вывода.
+### [ru] Проверка цветового вывода.
 AWK script. Makes test of different color output of awk print.<br>
 Syntax:<br>
 `echo "text"|awk -f ./test_colors.awk`<br>
@@ -17,7 +17,7 @@ or:<br>
 ![test_colors](test_colors.gif)<br>
 
 ## [HighLight](hl.awk)
-### [ru] Выделение текста цветом
+### [ru]Выделение текста цветом
 Script written on AWK for highlighting some text in command outputs by differrent colors.<br>
 How to use:
 ```
@@ -55,7 +55,12 @@ bc -q <<< $(sed 's/^count=.*$/count='$count'/g;s/^number=.*$/number='$number'/g;
 ```
 ## [Array Tree](arraytree.awk)
 ### [ru] Массив AWK в виде дерева.
-GNU AWK script for exploring contents of a multi-dimensional associative array. How to use: edit the script file, and change the 'ENVIRON' words in `arraytree(ENVIRON,"ENVIRON")` string to the name of your array.<br>
+GNU AWK script for exploring contents of a multi-dimensional associative array. Example:
+```
+#!/usr/bin/gawk
+@include "arraytree.awk"
+arraytree(ENVIRON,"ENVIRON")
+```
 *Screenshot:*<br>
 ![arraytree](arraytree.png)
 
