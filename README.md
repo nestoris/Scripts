@@ -59,7 +59,9 @@ GNU AWK script for exploring contents of a multi-dimensional associative array. 
 ```
 #!/usr/bin/gawk
 @include "arraytree.awk"
-arraytree(ENVIRON,"ENVIRON")
+BEGIN{
+ arraytree(ENVIRON,"ENVIRON")
+}
 ```
 *Screenshot:*<br>
 ![arraytree](arraytree.png)
