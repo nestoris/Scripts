@@ -27,7 +27,7 @@ gio_info("computer:///root.link",rootFS_icon_info)
 ![](gio_dir.png)
 
 ## [Array Tree](arraytree.awk)
-**[ru] Массив AWK в виде дерева.**
+**[ru] Массив AWK в виде дерева.**<br>
 GNU AWK script for exploring contents of a multi-dimensional associative array. Example:
 ```
 #!/usr/bin/gawk
@@ -41,7 +41,7 @@ Installation and usage is the same as with *GIO Functions library*.
 ![arraytree](arraytree.png)
 
 ## [HighLight](hl.awk)
-**[ru]Выделение текста цветом**
+**[ru]Выделение текста цветом**<br>
 Script written on AWK for highlighting some text in command outputs by differrent colors.<br>
 How to use:
 ```
@@ -57,7 +57,7 @@ yay -Ss ConnMan|hl.awk connman network manager user 2016 menu tray gtk lxqt inte
 ![](hl_regexp.png)
 
 ## [Reverse package dependency](pacdep.sh)
-**[ru] Что зависит от пакета (pacman)**
+**[ru] Что зависит от пакета (pacman)**<br>
 The script for finding reverse dependencies with pacman package manager.<br>
 How to use:
 ```
@@ -68,7 +68,7 @@ pacdep.sh [PACKAGE1] [PACKAGE2]...
 ![](pacdep.png)
 
 ## [Test Colors](test_colors.awk "test_colors.awk")
-**[ru] Проверка цветового вывода.**
+**[ru] Проверка цветового вывода.**<br>
 AWK script. Makes test of different color output of awk print.<br>
 Syntax:<br>
 `echo "text"|awk -f ./test_colors.awk`<br>
@@ -82,7 +82,7 @@ or:<br>
 ![test_colors](test_colors.gif)<br>
 
 ## [Undivide](undivide.bc)
-**[ru] Что на что поделили, чтобы ЭТО получилось.**
+**[ru] Что на что поделили, чтобы ЭТО получилось.**<br>
 Script written on arithmetical **BC** language for finding a closest dividing operation, that can make a floating point number.<br>For running directly -- just make script executable by: "`$chmod +x undivide.bc`", and edit variables: 'count', 'number' and 'afterdot'.<br>Usage in bash scripts:
 ```
 #!/bin/bash
@@ -93,7 +93,7 @@ bc -q <<< $(sed 's/^count=.*$/count='$count'/g;s/^number=.*$/number='$number'/g;
 ```
 
 ## [Russian Number Endings](rne.awk)
-**[ru] Русские окончания числительных.**
+**[ru] Русские окончания числительных.**<br>
 AWK functions of obtaining Russian endings (or any parts of word) and postfixes of numerals, such as: "1 ведро, 2 ведра, 11 вёдер, об 1-м значке, о 2-х значках, о 2000-ах значков и т. д." <br>Functions:
 ```
 rne(number,1_21_31,5-20_25-30,2-4_22-24,0)
