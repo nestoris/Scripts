@@ -1,9 +1,9 @@
 # Useful Scripts
-### [ru] Полезные скрипты
+**[ru] Полезные скрипты**
 Some useful scripts written for myself. Maybe will be useful for you too.
 
 ## [Test Colors](test_colors.awk "test_colors.awk")
-### [ru] Проверка цветового вывода.
+**[ru] Проверка цветового вывода.**
 AWK script. Makes test of different color output of awk print.<br>
 Syntax:<br>
 `echo "text"|awk -f ./test_colors.awk`<br>
@@ -17,7 +17,7 @@ or:<br>
 ![test_colors](test_colors.gif)<br>
 
 ## [HighLight](hl.awk)
-### [ru]Выделение текста цветом
+**[ru]Выделение текста цветом**
 Script written on AWK for highlighting some text in command outputs by differrent colors.<br>
 How to use:
 ```
@@ -33,7 +33,7 @@ yay -Ss ConnMan|hl.awk connman network manager user 2016 menu tray gtk lxqt inte
 ![](hl_regexp.png)
 
 ## [Reverse package dependency](pacdep.sh)
-### [ru] Что зависит от пакета (pacman)
+**[ru] Что зависит от пакета (pacman)**
 The script for finding reverse dependencies with pacman package manager.<br>
 How to use:
 ```
@@ -44,7 +44,7 @@ pacdep.sh [PACKAGE1] [PACKAGE2]...
 ![](pacdep.png)
 
 ## [Undivide](undivide.bc)
-### [ru] Что на что поделили, чтобы ЭТО получилось.
+**[ru] Что на что поделили, чтобы ЭТО получилось.**
 Script written on arithmetical **BC** language for finding a closest dividing operation, that can make a floating point number.<br>For running directly -- just make script executable by: "`$chmod +x undivide.bc`", and edit variables: 'count', 'number' and 'afterdot'.<br>Usage in bash scripts:
 ```
 #!/bin/bash
@@ -54,7 +54,7 @@ afterdot=8 #limit of digits after dot
 bc -q <<< $(sed 's/^count=.*$/count='$count'/g;s/^number=.*$/number='$number'/g;s/^afterdot=.*$/afterdot='$afterdot'/g;' ./undivide.bc)
 ```
 ## [Array Tree](arraytree.awk)
-### [ru] Массив AWK в виде дерева.
+**[ru] Массив AWK в виде дерева.**
 GNU AWK script for exploring contents of a multi-dimensional associative array. Example:
 ```
 #!/usr/bin/gawk
@@ -65,59 +65,8 @@ BEGIN{
 ```
 *Screenshot:*<br>
 ![arraytree](arraytree.png)
-
-## [Test icon theme](test-icon-theme.awk)
-### [ru] Все ли значки правильно разложены по своим размерам?
-Test if all the PNG icons of an IconTheme have the same size as it was set in icon.theme file.<br>
-*Screenshot:*<br>
-![Screenshot](test-icon-theme.png)
-Requirements:<br>
-[GAWK for GNU/Linux](https://www.gnu.org/software/gawk/)<br>
-[Gawk libraries:](https://sourceforge.net/projects/gawkextlib/files/)
-* gawkextlib
-* gd
-* readdir
-* filefuncs
-
-Installation of **gawk**:<br>
-Arch/Manjaro:
-```
-pacman -S gawk
-```
-Debian/Ubuntu/Mint:
-```
-apt install gawk
-```
-Installation of **gawk extensions**:<br>
-Arch/Manjaro (from AUR):
-```
-yay -S gawkextlib gawk-so
-```
-or
-```
-yaourt -S gawkextlib gawk-so
-```
-or
-```
-pacaur -S gawkextlib gawk-so
-```
-
-Debian/Ubuntu/Mint:
-```
-git clone git://git.code.sf.net/p/gawkextlib/code gawkextlib-code
-cd gawkextlib-code
-./build.sh lib
-./build.sh gd
-```
-
-Syntax:
-```
-./test-icon-theme.awk /path/to/theme1/index.theme ../../path/to/theme2/index.theme
-```
-
-
 ## [Russian Number Endings](rne.awk)
-### [ru] Русские окончания числительных.
+**[ru] Русские окончания числительных.**
 AWK functions of obtaining Russian endings (or any parts of word) and postfixes of numerals, such as: "1 ведро, 2 ведра, 11 вёдер, об 1-м значке, о 2-х значках, о 2000-ах значков и т. д." <br>Functions:
 ```
 rne(number,1_21_31,5-20_25-30,2-4_22-24,0)
@@ -148,10 +97,3 @@ BEGIN{
 ```
 Output:<br>
 ![](samosvaley.png)
-## [Icon Table](icontable.awk)
-### Таблица форматов значка виндоус.
-An AWK script, that opens MS Windows® *.ico* files as HTML-tables.<br>
-Needed "icoutils" package as dependency.<br>
-*Screenshot*<br>
-![screen1](./icontable_muz.png "folder-music")<br>
-![screen1](./icontable_foxit.png "foxit reader")
