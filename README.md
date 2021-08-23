@@ -5,15 +5,15 @@ Some useful scripts written for myself. Maybe will be useful for you too.
 # [GIO Functions](gio.awk)
 GAWK Library for adding functions of converting some various GIO-info about files/locations such as **smb://192.168.8.1/share/photo.jpg** or **computer:///TOSHIBA HDWL120.drive**<br>
 installation:<br>
-Get AWKPATH by running:
+1) Get AWKPATH by running:
 ```
 gawk 'BEGIN{x=ENVIRON["AWKPATH"];gsub(":","\n",x);print x}'
 ```
-Choose preferred path from list and create symlink:
+2) Choose preferred path from list and create symlink:
 ```
 ln -s gio.awk </chosen/path>
 ```
-Usage:
+3) Usage:
 ```
 #!/usr/bin/gawk -f
 @include "gio.awk"
@@ -28,7 +28,7 @@ gio_info("computer:///root.link",rootFS_icon_info)
 
 ## [Array Tree](arraytree.awk)
 **[ru] Массив AWK в виде дерева.**<br>
-GNU AWK script for exploring contents of a multi-dimensional associative array. Example:
+GNU AWK script for exploring contents of a multi-dimensional associative array.<br> Example:
 ```
 #!/usr/bin/gawk
 @include "arraytree.awk"
@@ -36,7 +36,7 @@ BEGIN{
  arraytree(ENVIRON,"ENVIRON")
 }
 ```
-Installation and usage is the same as with *GIO Functions library*.
+Installation and usage is the same as with *GIO Functions library*.<br>
 *Screenshot:*<br>
 ![arraytree](arraytree.png)
 
