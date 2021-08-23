@@ -5,7 +5,7 @@ Some useful scripts written for myself. Maybe will be useful for you too.
 # [GIO Functions](gio.awk)
 GAWK Library for adding functions of converting some various GIO-info about files/locations such as **smb://192.168.8.1/share/photo.jpg** or **computer:///TOSHIBA HDWL120.drive**<br>
 installation:<br>
-1) Get AWKPATH by running:
+1) Get awk @include library (AWKPATH built-in variable) by running:
 ```
 gawk 'BEGIN{x=ENVIRON["AWKPATH"];gsub(":","\n",x);print x}'
 ```
