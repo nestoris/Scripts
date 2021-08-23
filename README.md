@@ -2,19 +2,43 @@
 **[ru] Полезные скрипты**
 Some useful scripts written for myself. Maybe will be useful for you too.
 
-## [Test Colors](test_colors.awk "test_colors.awk")
-**[ru] Проверка цветового вывода.**
-AWK script. Makes test of different color output of awk print.<br>
-Syntax:<br>
-`echo "text"|awk -f ./test_colors.awk`<br>
-or:<br>
-`echo "text"|./test_colors.awk`<br>
-or:<br>
-`./test_colors.awk <<< "text"`<br>
-or:<br>
-`awk -f ./test_colors.awk <<< "text"`<br>
+# [GIO Functions](gio.awk)
+GAWK Library for adding functions of converting some various GIO-info about files/locations such as **smb://192.168.8.1/share/photo.jpg** or **computer:///TOSHIBA HDWL120.drive**<br>
+installation:<br>
+Get AWKPATH by running:
+```
+gawk 'BEGIN{x=ENVIRON["AWKPATH"];gsub(":","\n",x);print x}'
+```
+Choose preferred path from list and create symlink:
+```
+ln -s gio.awk </chosen/path>
+```
+Usage:
+```
+#!/usr/bin/gawk -f
+@include "gio.awk"
+BEGIN{
+gio_dir("computer:///",comp_list_array_all_attributes,"*")
+gio_info("computer:///root.link",rootFS_icon_info)
+}
+```
+*Screenshots:*<br>
+![](gio_info.png)<br>
+![](gio_dir.png)
+
+## [Array Tree](arraytree.awk)
+**[ru] Массив AWK в виде дерева.**
+GNU AWK script for exploring contents of a multi-dimensional associative array. Example:
+```
+#!/usr/bin/gawk
+@include "arraytree.awk"
+BEGIN{
+ arraytree(ENVIRON,"ENVIRON")
+}
+```
+Installation and usage is the same as with *GIO Functions library*.
 *Screenshot:*<br>
-![test_colors](test_colors.gif)<br>
+![arraytree](arraytree.png)
 
 ## [HighLight](hl.awk)
 **[ru]Выделение текста цветом**
@@ -43,6 +67,20 @@ pacdep.sh [PACKAGE1] [PACKAGE2]...
 *Screenshot:*<br>
 ![](pacdep.png)
 
+## [Test Colors](test_colors.awk "test_colors.awk")
+**[ru] Проверка цветового вывода.**
+AWK script. Makes test of different color output of awk print.<br>
+Syntax:<br>
+`echo "text"|awk -f ./test_colors.awk`<br>
+or:<br>
+`echo "text"|./test_colors.awk`<br>
+or:<br>
+`./test_colors.awk <<< "text"`<br>
+or:<br>
+`awk -f ./test_colors.awk <<< "text"`<br>
+*Screenshot:*<br>
+![test_colors](test_colors.gif)<br>
+
 ## [Undivide](undivide.bc)
 **[ru] Что на что поделили, чтобы ЭТО получилось.**
 Script written on arithmetical **BC** language for finding a closest dividing operation, that can make a floating point number.<br>For running directly -- just make script executable by: "`$chmod +x undivide.bc`", and edit variables: 'count', 'number' and 'afterdot'.<br>Usage in bash scripts:
@@ -53,18 +91,7 @@ number=3.14159265358979323846264338327950288419716939937508 #our number
 afterdot=8 #limit of digits after dot
 bc -q <<< $(sed 's/^count=.*$/count='$count'/g;s/^number=.*$/number='$number'/g;s/^afterdot=.*$/afterdot='$afterdot'/g;' ./undivide.bc)
 ```
-## [Array Tree](arraytree.awk)
-**[ru] Массив AWK в виде дерева.**
-GNU AWK script for exploring contents of a multi-dimensional associative array. Example:
-```
-#!/usr/bin/gawk
-@include "arraytree.awk"
-BEGIN{
- arraytree(ENVIRON,"ENVIRON")
-}
-```
-*Screenshot:*<br>
-![arraytree](arraytree.png)
+
 ## [Russian Number Endings](rne.awk)
 **[ru] Русские окончания числительных.**
 AWK functions of obtaining Russian endings (or any parts of word) and postfixes of numerals, such as: "1 ведро, 2 ведра, 11 вёдер, об 1-м значке, о 2-х значках, о 2000-ах значков и т. д." <br>Functions:
@@ -97,27 +124,3 @@ BEGIN{
 ```
 Output:<br>
 ![](samosvaley.png)
-# [GIO Functions](gio.awk)
-GAWK Library for adding functions of converting some various GIO-info about files/locations such as **smb://192.168.8.1/share/photo.jpg** or **computer:///TOSHIBA HDWL120.drive**<br>
-installation:<br>
-Get AWKPATH by running:
-```
-gawk 'BEGIN{x=ENVIRON["AWKPATH"];gsub(":","\n",x);print x}'
-```
-Choose preferred path from list and create symlink:
-```
-ln -s gio.awk </chosen/path>
-```
-Usage:
-```
-#!/usr/bin/gawk -f
-@include "gio.awk"
-BEGIN{
-gio_dir("computer:///",comp_list_array_all_attributes,"*")
-gio_info("computer:///root.link",rootFS_icon_info)
-}
-```
-
-*Screenshots:*<br>
-![](gio_info.png)<br>
-![](gio_dir.png)
