@@ -13,6 +13,10 @@ gawk 'BEGIN{x=ENVIRON["AWKPATH"];gsub(":","\n",x);print x}'
 ```
 ln -s gio.awk </chosen/path>
 ```
+or:
+```
+cp gio.awk </chosen/path>
+```
 3) Usage:
 ```
 #!/usr/bin/gawk -f
