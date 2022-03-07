@@ -1,0 +1,73 @@
+#!/usr/bin/gawk -f
+
+# GAWK & YAD interface for simple toggling of RedShift day/night
+
+function _init_(){
+if(("command -v yad"|getline yad)<1){print "\033[1mYet Another Dialog\033[0m not found!\nPlease install \033[1myad\033[0m binary to a directory in your \033[3m$PATH\033[0m variable!";exit -1}
+}
+
+function yap(text){ # apply argument to yad
+yargs=yargs " " text
+}
+
+function will(daytemp, nighttemp){ # main toggling function
+cmd_night="redshift -PO " nighttemp "K > /dev/null"
+cmd_day="redshift -PO " daytemp "K > /dev/null"
+cmd_reset="redshift -x"
+
+icon_on="redshift-status-on"
+icon_off="redshift-status-off"
+
+red=0
+while((yad yargs |& getline)>0){
+switch($0){
+case "toggle":
+	red=red?0:1
+	msg="icon:" (red?icon_on:icon_off)
+	system(red?cmd_night:cmd_day)
+	gyad(msg)
+	print "Display temperature: " (red?nighttemp:daytemp) "K"
+	break
+case "night":
+	print "night"
+	system(cmd_night)
+	gyad("icon:redshift-status-on")
+	break
+case "day":
+	print "day"
+	system(cmd_day)
+	gyad("icon:redshift-status-off")
+	break
+}
+}
+close(cmd_night)
+close(cmd_day)
+system(cmd_reset)
+close(cmd_reset)
+close("redshift")
+}
+
+function gyad(str) #dialog betwin YAD frontend and GAWK backend
+{
+print str |& (yad yargs)
+}
+
+BEGIN{
+# set temperatures
+daytemp=6500
+nighttemp=3400
+_init_() # find yad binary
+
+#building interface
+yap("--notification")
+yap("--listen")
+yap("--image redshift-status-off")
+yap("--menu=\"Day temp.!echo day|Night temp.!echo night|Exit!quit\"")
+yap("--command=\"echo 'toggle'\"")
+
+# executing
+will(daytemp, nighttemp)
+
+
+}
+

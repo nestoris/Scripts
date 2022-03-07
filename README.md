@@ -2,47 +2,10 @@
 **[ru] Полезные скрипты**
 Some useful scripts written for myself. Maybe will be useful for you too.
 
-# [GIO Functions](gio.awk)
-GAWK Library for adding functions of converting some various GIO-info about files/locations such as **smb://192.168.8.1/share/photo.jpg** or **computer:///TOSHIBA HDWL120.drive**<br>
-installation:<br>
-1) Get awk @include library (AWKPATH built-in variable) by running:
-```
-gawk 'BEGIN{x=ENVIRON["AWKPATH"];gsub(":","\n",x);print x}'
-```
-2) Choose preferred path from list and create symlink:
-```
-ln -s gio.awk </chosen/path>
-```
-or:
-```
-cp gio.awk </chosen/path>
-```
-3) Usage:
-```
-#!/usr/bin/gawk -f
-@include "gio.awk"
-BEGIN{
-gio_dir("computer:///",comp_list_array_all_attributes,"*")
-gio_info("computer:///root.link",rootFS_icon_info)
-}
-```
-*Screenshots:*<br>
-![](gio_info.png)<br>
-![](gio_dir.png)
-
-## [Array Tree](arraytree.awk)
-**[ru] Массив AWK в виде дерева.**<br>
-GNU AWK script for exploring contents of a multi-dimensional associative array.<br> Example:
-```
-#!/usr/bin/gawk
-@include "arraytree.awk"
-BEGIN{
- arraytree(ENVIRON,"ENVIRON")
-}
-```
-Installation and usage is the same as with *GIO Functions library*.<br>
-*Screenshot:*<br>
-![arraytree](arraytree.png)
+## [RedShift-YAD](redshift-yad)
+**[ru]Простейший переключатель в системном лотке для тонировщика экрана RedShift**<br>
+This is a simple toggler for RedShift night eye-saver.<br>
+Reqirements: `gawk`, `yad`
 
 ## [HighLight](hl.awk)
 **[ru]Выделение текста цветом**<br>
@@ -88,6 +51,7 @@ or:<br>
 ## [Undivide](undivide.bc)
 **[ru] Что на что поделили, чтобы ЭТО получилось.**<br>
 Script written on arithmetical **BC** language for finding a closest dividing operation, that can make a floating point number.<br>For running directly -- just make script executable by: "`$chmod +x undivide.bc`", and edit variables: 'count', 'number' and 'afterdot'.<br>Usage in bash scripts:
+
 ```
 #!/bin/bash
 count=2000 #how many multipliers to test with number
@@ -99,11 +63,14 @@ bc -q <<< $(sed 's/^count=.*$/count='$count'/g;s/^number=.*$/number='$number'/g;
 ## [Russian Number Endings](rne.awk)
 **[ru] Русские окончания числительных.**<br>
 AWK functions of obtaining Russian endings (or any parts of word) and postfixes of numerals, such as: "1 ведро, 2 ведра, 11 вёдер, об 1-м значке, о 2-х значках, о 2000-ах значков и т. д." <br>Functions:
+
 ```
 rne(number,1_21_31,5-20_25-30,2-4_22-24,0)
 rne_pf(number,for1,for2-4,for5-20,for40_90_100,for200-400,for1000,for2000-4000)
 ```
-<br> How to use:
+
+How to use:
+
 ```
 #!/usr/bin/gawk -f
 @include "rne.awk"
@@ -115,6 +82,7 @@ BEGIN{
 ```
 Output:<br>
 ![](baba_vedra.png)<br>
+
 ```
 #!/usr/bin/gawk -f
 @include "rne.awk"
