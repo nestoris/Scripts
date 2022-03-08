@@ -3,12 +3,22 @@
 Some useful scripts written for myself. Maybe will be useful for you too.
 
 ## [RedShift-YAD](redshift-yad)
-**[ru]Простейший переключатель в системном лотке для тонировщика экрана RedShift**<br>
+**[ru] Простейший переключатель в системном лотке для тонировщика экрана RedShift**<br>
 This is a simple toggler for RedShift night eye-saver.<br>
 Reqirements: `gawk`, `yad`
 
+*Screenshot:*<br>
+![](screen/reshift-yad.png)
+
+Installation:
+
+* Install `gawk` and `yad`.
+* Copy [redshift-status-off.svg](icons/redshift-status-off.svg) and [redshift-status-on.svg](icons/redshift-status-on.svg) to your `/usr/share/pixmaps/` directory.
+* Run command: `chmod +x redshift-yad`
+* Execute the script or add it to autorun directory.
+
 ## [HighLight](hl.awk)
-**[ru]Выделение текста цветом**<br>
+**[ru] Выделение текста цветом**<br>
 Script written on AWK for highlighting some text in command outputs by differrent colors.<br>
 How to use:
 ```
@@ -19,9 +29,9 @@ or (example on screenshot)
 yay -Ss ConnMan|hl.awk connman network manager user 2016 menu tray gtk lxqt interface
 ```
 *Screenshot:*<br>
-![](hl.png)<p>
+![](screen/hl.png)<p>
 *Screenshot with regexp:*<br>
-![](hl_regexp.png)
+![](screen/hl_regexp.png)
 
 ## [Reverse package dependency](pacdep.sh)
 **[ru] Что зависит от пакета (pacman)**<br>
@@ -32,7 +42,7 @@ pacdep.sh [PACKAGE1] [PACKAGE2]...
 ```
 
 *Screenshot:*<br>
-![](pacdep.png)
+![](screen/pacdep.png)
 
 ## [Test Colors](test_colors.awk "test_colors.awk")
 **[ru] Проверка цветового вывода.**<br>
@@ -81,7 +91,7 @@ BEGIN{
 }
 ```
 Output:<br>
-![](baba_vedra.png)<br>
+![](screen/baba_vedra.png)<br>
 
 ```
 #!/usr/bin/gawk -f
@@ -95,4 +105,4 @@ BEGIN{
 }
 ```
 Output:<br>
-![](samosvaley.png)
+![](screen/samosvaley.png)

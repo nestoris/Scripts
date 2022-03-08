@@ -32,11 +32,13 @@ case "night":
 	print "night"
 	system(cmd_night)
 	gyad("icon:redshift-status-on")
+	red=1
 	break
 case "day":
 	print "day"
 	system(cmd_day)
 	gyad("icon:redshift-status-off")
+	red=0
 	break
 }
 }
