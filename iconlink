@@ -11,7 +11,7 @@ return stda["type"]=="file"?1:0
 
 
 BEGIN{
-if(!ARGV[1]||!ARGV[2]||ARGV[1]~"^--help$"||ARGV[1]~"^-h$"){print "Iconlink. Creates symlink(s) in the same or PARENT/SIZE/CHILD directory to a png or svg files.\nSyntax:\n\ticonlink [original] [symlink]...\n\ticonlink application-x-rar ../apps/{}/winrar\n\tThe '{}' substring will be changed to the same size folder name.\nRun this script in folder with sizes;\nNames of icons must be WITHOUT extensions!"; exit -1}
+if(!ARGV[1]||!ARGV[2]||ARGV[1]~"^--help$"||ARGV[1]~"^-h$"){print "Iconlink. Creates symlink(s) in the same or PARENT/SIZE/CHILD directory to a png or svg files.\nSyntax:\n\ticonlink [original] [symlink]...\n\ticonlink application-x-rar ../apps/{}/winrar\n\tThe '{}' substring will be changed to the same size folder name.\nRun this script in Context folder containing Size folders!\nNames of icons must be WITHOUT extensions!"; exit -1}
 fn=ARGV[1]
 #tg=ARGV[2]
 for(arg=2;arg<ARGC;arg++){
