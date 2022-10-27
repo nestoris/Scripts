@@ -1,0 +1,62 @@
+#!/usr/bin/gawk -f
+@load "readdir"
+@load "filefuncs"
+
+function notlink(file,	stda,	res,	out){
+res=stat(file,stda)
+if(res>=0){
+return stda["type"]=="file"?1:0
+}else{return -1}
+}
+
+
+BEGIN{
+if(!ARGV[1]||!ARGV[2]||ARGV[1]~"^--help$"||ARGV[1]~"^-h$"){print "Iconlink. Creates symlink(s) in the same or PARENT/SIZE/CHILD directory to a png or svg files.\nSyntax:\n\ticonlink [original] [symlink]...\n\ticonlink application-x-rar ../apps/{}/winrar\n\tThe '{}' substring will be changed to size folder name.\nRun this script in folder with sizes;\nNames of icons must be WITHOUT extensions!"; exit -1}
+fn=ARGV[1]
+#tg=ARGV[2]
+for(arg=2;arg<ARGC;arg++){
+dsn++
+ARGV[arg]==ARGV[1]?"":tgs[dsn]=ARGV[arg]
+gsub(/,$/,"",tgs[dsn])
+}
+
+fs=FS
+FS=OFS="/"
+while((getline<".")>0){
+if($3=="d"&&$2!~/^\.+$/){
+while((getline fld < $2)>0){
+
+if(fld!~/\/\.*\//){
+split(fld,fa,"/")
+gensub(/^.*\./,"",1,fa[2])=="svg"?svgs++:gensub(/^.*\./,"",1,fa[2])=="png"?pngs++:"" # подсчёт svg и png
+noext=ext=fa[2]
+gsub(/\.[^.]*$/,"",noext)
+gsub(/^.*\./,"",ext)
+
+for(i in tgs){
+dst=tgs[i]
+gsub("{}",$2,dst)
+gsub("^../","../../",dst)
+if(noext==fn){
+cmd=notlink($2 "/" fa[2])?"ln -srf \"" $2 "/" fa[2] "\" \"" $2 "/" dst"."ext"\"":"File "$2 "/" fa[2] " is a symlink! Ignoring." # не делаем симлинк на симлинк
+if(cmd!~/^File /){
+system(cmd);close(cmd)
+#print cmd
+}
+full_dst=$2"/"dst"."ext
+result=stat(full_dst, statdata)
+#print full_dst
+#print length(statdata)
+("realpath -s '"statdata["name"]"'"|getline realpath)
+print (result>=0?"Symlink '"realpath "' has "(statdata["linkval"]?"":"no ")"target"(statdata["linkval"]?": '" statdata["linkval"] "'":"! But")" OK!":$2"/"dst"."ext " not found!")
+}
+}
+}
+
+}
+}
+}
+FS=OFS=fs
+#print "\nsvgs="svgs
+#print "pngs="pngs
+}
