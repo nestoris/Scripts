@@ -47,8 +47,12 @@ full_dst=$2"/"dst"."ext
 result=stat(full_dst, statdata)
 #print full_dst
 #print length(statdata)
+if(statdata["name"]){
 ("realpath -s '"statdata["name"]"'"|getline realpath)
 print (result>=0?"Symlink '"realpath "' has "(statdata["linkval"]?"":"no ")"target"(statdata["linkval"]?": '" statdata["linkval"] "'":"! But")" OK!":$2"/"dst"."ext " not found!")
+}else{
+print "No 'statdata[\"name\"]'!"
+}
 }
 }
 }
@@ -59,4 +63,6 @@ print (result>=0?"Symlink '"realpath "' has "(statdata["linkval"]?"":"no ")"targ
 FS=OFS=fs
 #print "\nsvgs="svgs
 #print "pngs="pngs
+cmd="gtk-update-icon-cache .."
+system(cmd);close(cmd)
 }
